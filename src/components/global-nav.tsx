@@ -14,7 +14,7 @@ export default function GlobalNav() {
   usePathname();
   return (
     <nav className="border-r p-4">
-      <ul>
+      <ul className="">
         {navs.map((nav) => (
           <li key={nav.href}>
             <Link

@@ -12,7 +12,7 @@ export async function GET(
   };
 
   console.log("msda", ms);
-  await sleep(Number(ms ?? 1000));
+  await sleep(Number(ms ?? 0));
 
   const response = await fetch(
     `https://jsonplaceholder.typicode.com/users/${id}`,

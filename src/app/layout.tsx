@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GlobalNav from "../components/global-nav";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "@/components/theme/mode-toggle";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,16 +37,18 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header className="border-b h-16 flex items-center font-bold text-2xl px-4 justify-between">
-            <p>React Hook Form Dev</p>
-            <ModeToggle />
-          </header>
-          <div className="grid grid-cols-12">
-            <div className="col-span-2">
-              <GlobalNav />
+          <AppRouterCacheProvider options={{ key: "css" }}>
+            <header className="border-b h-16 flex items-center font-bold text-2xl px-4 justify-between">
+              <p>React Hook Form Dev</p>
+              <ModeToggle />
+            </header>
+            <div className="grid grid-cols-12">
+              <div className="col-span-2">
+                <GlobalNav />
+              </div>
+              <main className="col-span-10 p-4">{children}</main>
             </div>
-            <main className="col-span-10 p-4">{children}</main>
-          </div>
+          </AppRouterCacheProvider>
         </ThemeProvider>
       </body>
     </html>
