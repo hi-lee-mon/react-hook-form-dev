@@ -49,27 +49,40 @@ export default function MyForm({ user }: { user?: User }) {
 
   return (
     <form onSubmit={handleSubmit((data) => console.log(data))}>
-      <h1>My Form</h1>
       <HStack className="gap-8 grid grid-cols-3">
         <VStack className="col-span-1 gap-2">
           <Controller
             name="name"
             control={control}
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
+            rules={{
+              required: "必須項目です",
+              maxLength: {
+                value: 6,
+                message: "6文字以内で入力してください",
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
               <TextField
                 type="text"
                 required
-                onChange={onChange}
-                value={value}
+                {...field}
+                error={!!error}
+                helperText={error?.message}
               />
             )}
           />
           <Controller
             name="email"
+            rules={{
+              required: "必須項目です",
+            }}
             control={control}
-            render={({ field: { onChange, value } }) => (
-              <TextField onChange={onChange} value={value} />
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                error={!!error}
+                helperText={error?.message}
+              />
             )}
           />
           <Button
@@ -106,6 +119,21 @@ export default function MyForm({ user }: { user?: User }) {
             sx={{ textTransform: "none" }}
           >
             {'setValue("name", String(Math.random() * 10))'}
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={() =>
+              setValue("name", String(Math.random() * 10), {
+                shouldValidate: true,
+              })
+            }
+            sx={{ textTransform: "none" }}
+          >
+            {`
+              setValue("name", String(Math.random() * 10), {
+                shouldValidate: true,
+              })
+            `}
           </Button>
         </VStack>
         <VStack className="grid grid-cols-2 col-span-2 gap-2">

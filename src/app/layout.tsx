@@ -38,7 +38,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AppRouterCacheProvider options={{ key: "css" }}>
-            <header className="border-b h-16 flex items-center font-bold text-2xl px-4 justify-between">
+            <header className="sticky top-0 border-b h-16 flex items-center font-bold text-2xl px-4 justify-between bg-gray-200/10 backdrop-blur-xs z-50">
               <p>React Hook Form Dev</p>
               <ModeToggle />
             </header>
