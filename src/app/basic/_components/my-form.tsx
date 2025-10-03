@@ -51,6 +51,7 @@ export default function MyForm({ useFormParam }: Props) {
             }}
             render={({ field, fieldState: { error } }) => (
               <TextField
+                label="名前"
                 type="text"
                 required
                 {...field}
@@ -67,6 +68,8 @@ export default function MyForm({ useFormParam }: Props) {
             control={control}
             render={({ field, fieldState: { error } }) => (
               <TextField
+                label="メールアドレス"
+                required
                 {...field}
                 error={!!error}
                 helperText={error?.message}
