@@ -2,26 +2,14 @@ import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import HStack from "@/components/layout/h-stack";
 import VStack from "@/components/layout/v-stack";
-import type { User } from "@/app/api/users/[id]/type";
 import ObjBlock from "@/components/obj-block";
+import type { UseFormParams } from "./type";
 
-type UseFormParams = Parameters<typeof useForm>[0];
+type Props = {
+  useFormParam: UseFormParams;
+};
 
-export default function MyForm({ user }: { user?: User }) {
-  const v = {
-    name: user?.name || "John Doe",
-    email: user?.email || "test@example.com",
-  };
-  const useFormParam = {
-    // defaultValues: v,
-    values: v,
-    // resetOptions: {
-    //   keepDirty: true,
-    //   keepValues: true,
-    //   keepErrors: true,
-    // },
-  } satisfies UseFormParams;
-
+export default function MyForm({ useFormParam }: Props) {
   const {
     control,
     handleSubmit,
@@ -138,11 +126,7 @@ export default function MyForm({ user }: { user?: User }) {
         </VStack>
         <VStack className="grid grid-cols-2 col-span-2 gap-2">
           <div className="col-span1">
-            <ObjBlock title="初期値にわたる値" obj={v} />
-            <ObjBlock title="watchのキャッシュ" obj={watch()} />
-          </div>
-          <div className="col-span1">
-            <ObjBlock title="useFormの引数" obj={useFormParam} />
+            <ObjBlock title="watch" obj={watch()} />
             <ObjBlock
               title="formState"
               obj={{
@@ -163,6 +147,9 @@ export default function MyForm({ user }: { user?: User }) {
                 defaultValues,
               }}
             />
+          </div>
+          <div className="col-span1">
+            <ObjBlock title="useFormの引数" obj={useFormParam} />
           </div>
         </VStack>
       </HStack>
