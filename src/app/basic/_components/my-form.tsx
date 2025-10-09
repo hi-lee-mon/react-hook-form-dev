@@ -36,126 +36,129 @@ export default function MyForm({ useFormParam }: Props) {
   } = useForm(useFormParam);
 
   return (
-    <form onSubmit={handleSubmit((data) => console.log(data))}>
-      <HStack className="gap-8 grid grid-cols-3">
-        <VStack className="col-span-1 gap-2">
-          <Controller
-            name="name"
-            control={control}
-            rules={{
-              required: "必須項目です",
-              maxLength: {
-                value: 6,
-                message: "6文字以内で入力してください",
-              },
-            }}
-            render={({ field, fieldState: { error } }) => (
-              <TextField
-                label="名前"
-                type="text"
-                required
-                {...field}
-                error={!!error}
-                helperText={error?.message}
-              />
-            )}
-          />
-          <Controller
-            name="email"
-            rules={{
-              required: "必須項目です",
-            }}
-            control={control}
-            render={({ field, fieldState: { error } }) => (
-              <TextField
-                label="メールアドレス"
-                required
-                {...field}
-                error={!!error}
-                helperText={error?.message}
-              />
-            )}
-          />
-          <Button
-            variant="contained"
-            type="submit"
-            onClick={() =>
-              handleSubmit((data) => alert(JSON.stringify(data, null, 2)))()
-            }
-            sx={{ textTransform: "none" }}
-          >
-            送信
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => reset()}
-            sx={{ textTransform: "none" }}
-          >
-            reset()
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() =>
-              reset({
-                name: "名前を指定してリセット",
-              })
-            }
-            sx={{ textTransform: "none" }}
-          >
-            {'reset( {name: "名前を指定してリセット"} )'}
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => setValue("name", String(Math.random() * 10))}
-            sx={{ textTransform: "none" }}
-          >
-            {'setValue("name", String(Math.random() * 10))'}
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() =>
-              setValue("name", String(Math.random() * 10), {
-                shouldValidate: true,
-              })
-            }
-            sx={{ textTransform: "none" }}
-          >
-            {`
+    <div>
+      <h2 className="text-2xl font-bold border-b mb-4 pb-2">ユーザフォーム</h2>
+      <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <HStack className="gap-8 grid grid-cols-3">
+          <VStack className="col-span-1 gap-2">
+            <Controller
+              name="name"
+              control={control}
+              rules={{
+                required: "必須項目です",
+                maxLength: {
+                  value: 6,
+                  message: "6文字以内で入力してください",
+                },
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  label="名前"
+                  type="text"
+                  required
+                  {...field}
+                  error={!!error}
+                  helperText={error?.message}
+                />
+              )}
+            />
+            <Controller
+              name="email"
+              rules={{
+                required: "必須項目です",
+              }}
+              control={control}
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  label="メールアドレス"
+                  required
+                  {...field}
+                  error={!!error}
+                  helperText={error?.message}
+                />
+              )}
+            />
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={() =>
+                handleSubmit((data) => alert(JSON.stringify(data, null, 2)))()
+              }
+              sx={{ textTransform: "none" }}
+            >
+              送信
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => reset()}
+              sx={{ textTransform: "none" }}
+            >
+              reset()
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() =>
+                reset({
+                  name: "名前を指定してリセット",
+                })
+              }
+              sx={{ textTransform: "none" }}
+            >
+              {'reset( {name: "名前を指定してリセット"} )'}
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => setValue("name", String(Math.random() * 10))}
+              sx={{ textTransform: "none" }}
+            >
+              {'setValue("name", String(Math.random() * 10))'}
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() =>
+                setValue("name", String(Math.random() * 10), {
+                  shouldValidate: true,
+                })
+              }
+              sx={{ textTransform: "none" }}
+            >
+              {`
               setValue("name", String(Math.random() * 10), {
                 shouldValidate: true,
               })
             `}
-          </Button>
-        </VStack>
-        <VStack className="grid grid-cols-2 col-span-2 gap-2">
-          <div className="col-span1">
-            <ObjBlock title="watch" obj={watch()} />
-            <ObjBlock
-              title="formState"
-              obj={{
-                dirtyFields,
-                disabled,
-                errors,
-                isDirty,
-                isLoading,
-                isReady,
-                isSubmitSuccessful,
-                isSubmitted,
-                isSubmitting,
-                isValid,
-                isValidating,
-                submitCount,
-                touchedFields,
-                validatingFields,
-                defaultValues,
-              }}
-            />
-          </div>
-          <div className="col-span1">
-            <ObjBlock title="useFormの引数" obj={useFormParam} />
-          </div>
-        </VStack>
-      </HStack>
-    </form>
+            </Button>
+          </VStack>
+          <VStack className="grid grid-cols-2 col-span-2 gap-2">
+            <div className="col-span1">
+              <ObjBlock title="watch" obj={watch()} />
+              <ObjBlock
+                title="formState"
+                obj={{
+                  dirtyFields,
+                  disabled,
+                  errors,
+                  isDirty,
+                  isLoading,
+                  isReady,
+                  isSubmitSuccessful,
+                  isSubmitted,
+                  isSubmitting,
+                  isValid,
+                  isValidating,
+                  submitCount,
+                  touchedFields,
+                  validatingFields,
+                  defaultValues,
+                }}
+              />
+            </div>
+            <div className="col-span1">
+              <ObjBlock title="useFormの引数" obj={useFormParam} />
+            </div>
+          </VStack>
+        </HStack>
+      </form>
+    </div>
   );
 }
