@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const navs = [
   { href: "/basic", label: "基本" },
@@ -13,8 +13,8 @@ export default function GlobalNav() {
   const pathname = usePathname();
   usePathname();
   return (
-    <nav className="border-r p-4">
-      <ul className="">
+    <nav className="border-r p-4 h-full">
+      <ul className="flex flex-col gap-2">
         {navs.map((nav) => (
           <li key={nav.href}>
             <Link
