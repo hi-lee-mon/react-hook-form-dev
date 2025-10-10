@@ -16,6 +16,8 @@ export default function MyForm({ useFormParam }: Props) {
     watch,
     reset,
     setValue,
+    clearErrors,
+    getValues,
     formState: {
       dirtyFields,
       disabled,
@@ -37,7 +39,10 @@ export default function MyForm({ useFormParam }: Props) {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold border-b mb-4 pb-2">ユーザフォーム</h2>
+      <HStack className="items-center gap-4 mb-4">
+        <h2 className="text-2xl font-bold">ユーザフォーム</h2>
+        {/* <p>再レンダリング回数：{renderCount}</p> */}
+      </HStack>
       <form onSubmit={handleSubmit((data) => console.log(data))}>
         <HStack className="gap-8 grid grid-cols-3">
           <VStack className="col-span-1 gap-2">
@@ -128,10 +133,28 @@ export default function MyForm({ useFormParam }: Props) {
               })
             `}
             </Button>
+            <Button
+              variant="outlined"
+              onClick={() => clearErrors(["name"])}
+              sx={{ textTransform: "none" }}
+            >
+              {`clearErrors(["name"])`}
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setValue("name", "更新");
+                const values = getValues();
+                alert(JSON.stringify(values, null, 2));
+              }}
+              sx={{ textTransform: "none" }}
+            >
+              {`alert(getValues())`}
+            </Button>
           </VStack>
           <VStack className="grid grid-cols-2 col-span-2 gap-2">
             <div className="col-span1">
-              <ObjBlock title="watch" obj={watch()} />
+              <ObjBlock title="watch()" obj={watch()} />
               <ObjBlock
                 title="formState"
                 obj={{
@@ -155,6 +178,7 @@ export default function MyForm({ useFormParam }: Props) {
             </div>
             <div className="col-span1">
               <ObjBlock title="useFormの引数" obj={useFormParam} />
+              <ObjBlock title="getValues()" obj={getValues()} />
             </div>
           </VStack>
         </HStack>
