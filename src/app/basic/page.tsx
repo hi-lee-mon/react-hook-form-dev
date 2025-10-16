@@ -42,8 +42,8 @@ export default function Page() {
   const [keepErrors, toggleKeepErrors] = useReducer((prev) => !prev, false);
 
   const formValues = {
-    name: data?.name,
-    email: data?.email,
+    name: data?.name ?? "",
+    email: data?.email ?? "",
   };
 
   const useFormParam = {
